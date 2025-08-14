@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>YPSF – Youth Publications & Socioeconomic Forum</title>
+  <style>
+    /* ========= THEME ========= */
+    :root{
+      --ink:#141316; --muted:#6b7280; --bg:#0f0e10;
+      --brand1:#7a0e23; --brand2:#a32738; --brand3:#e04a59; --brand4:#ff8aa7;
+      --card: rgba(255,255,255,.78);
+      --ring: rgba(255,255,255,.45);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;color:var(--ink);background:#fff}
+
+    /* Heavier shiny red aurora background */
+    .aurora{position:fixed;inset:0;z-index:-1;pointer-events:none}
+    .aurora::before{content:"";position:absolute;inset:0;filter:blur(60px);opacity:.55;background:
+      radial-gradient(1000px 560px at -10% -10%,rgba(224,74,89,.75),transparent 60%),
+      radial-gradient(900px 520px at 110% 0%,rgba(163,39,56,.7),transparent 60%),
+      radial-gradient(1300px 900px at 50% 120%,rgba(255,138,167,.8),transparent 60%);
+      animation: drift 16s ease-in-out infinite alternate}
+    .aurora::after{content:"";position:absolute;inset:0;opacity:.45;background:conic-gradient(from 0deg at 50% 0%, rgba(255,204,212,.9), transparent 60%);filter:blur(80px);animation: spin 40s linear infinite}
+    @keyframes drift{to{transform:translateY(-10px)}}
+    @keyframes spin{to{transform:rotate(1turn)}}
+
+    /* Layout helpers */
+    .container{max-width:1140px;margin:0 auto;padding:0 20px}
+    .grid{display:grid;gap:24px}
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    @media (max-width:900px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+    /* Glass card */
+    .card{background:var(--card);border:1px solid var(--ring);backdrop-filter:saturate(140%) blur(10px);border-radius:16px;box-shadow:0 10px 30px rgba(122,14,35,.08)}
+    .ring{border:1px solid rgba(163,39,56,.25)}
+    .accent-ring{position:relative}
+    .accent-ring:before{content:"";position:absolute;inset:-1px;border-radius:16px;padding:1px;background:linear-gradient(135deg,rgba(163,39,56,.5),rgba(224,74,89,.5),rgba(255,138,167,.4));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:0} 
+
+    /* Buttons */
+    .btn, a.btn, a.btn:link, a.btn:visited{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.9rem 1.2rem;border-radius:12px;font-weight:800;border:0;cursor:pointer;text-decoration:none}
+    .btn-grad{color:#fff;background-image:linear-gradient(135deg,var(--brand2),var(--brand3),var(--brand4));background-size:200% 200%;animation:shift 8s ease infinite;box-shadow:0 10px 24px rgba(224,74,89,.35)}
+    .btn-ghost{background:rgba(255,255,255,.92);box-shadow:inset 0 0 0 2px rgba(163,39,56,.25), 0 2px 8px rgba(0,0,0,.06)}
+    .btn-outline{position:relative;color:#7a0e23;background:rgba(255,255,255,.96);} 
+    .btn-outline::before{content:"";position:absolute;inset:-2px;border-radius:14px;padding:2px;background:linear-gradient(135deg,var(--brand2),var(--brand3));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+    .btn:hover{transform:translateY(-1px)}
+    @keyframes shift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+    /* Typo */
+    h1{font-size:clamp(2rem,3.8vw,3.25rem);line-height:1.1;margin:0 0 .6rem}
+    h2{font-size:clamp(1.5rem,2.6vw,2.25rem);margin:0 0 .8rem}
+    h3{font-size:1.125rem;margin:.2rem 0 .25rem}
+    p{margin:.5rem 0;color:var(--muted)}
+    .eyebrow{letter-spacing:.18em;text-transform:uppercase;color:#7a0e23;font-weight:700;font-size:.78rem;margin-bottom:.5rem}
+
+    /* Header / Nav */
+    header{position:sticky;top:0;z-index:40;background:linear-gradient(90deg,#7a0e23,#a32738,#e04a59);color:#fff;border-bottom:0}
+    .brand{display:flex;align-items:center;gap:10px;color:#fff}
+    nav a{display:inline-flex;align-items:center;padding:.5rem .75rem;border-radius:10px;font-weight:700;color:#fff;text-decoration:none}
+    nav a.active, nav a:hover{background:rgba(255,255,255,.16);color:#fff}
+    .nav-wrap{display:flex;align-items:center;gap:8px}
+    @media (max-width:900px){nav .nav-wrap{display:none}}
+    .nav-toggle{display:none;color:#fff;border:1px solid rgba(255,255,255,.25)}
+    .nav-toggle:hover{background:rgba(255,255,255,.12)}
+    @media (max-width:900px){.nav-toggle{display:inline-flex}}
+
+    /* CSS Logo styled like your mark */
+    .logo-word{font-weight:1000;font-size:22px;letter-spacing:.02em;font-style:italic;line-height:1;background:linear-gradient(180deg,#ff2e3e,#a30f23);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:1.5px #ffffff;text-shadow:1px 1px 0 #8e0f20,2px 2px 0 #8e0f20}
+    .speed-lines{width:44px;height:14px;position:relative;transform:skewX(-10deg) translateY(2px);margin-left:6px}
+    .speed-lines:before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#fff,#ffd6dd);box-shadow:0 1px 0 rgba(0,0,0,.15),0 6px 0 rgba(0,0,0,.15),0 12px 0 rgba(0,0,0,.15)}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+    /* Sections */
+    section{padding:64px 0}
+    .hero{padding:92px 0 72px}
+
+    /* Placeholder image */
+    .ph{position:relative;aspect-ratio:4/3;border-radius:16px;background:linear-gradient(145deg,#fff, #ffe3ea);border:1px solid rgba(224,74,89,.25);display:grid;place-items:center;color:#a33d4e}
+    .ph:after{content:"add photo later";position:absolute;bottom:8px;right:12px;font-size:12px;color:rgba(0,0,0,.45)}
+
+    /* Footer */
+    footer{background:linear-gradient(135deg,#7a0e23,#a32738,#e04a59);color:#fff}
+    footer a{color:#fff}
+
+    /* Toast */
+    .toast{position:fixed;right:16px;bottom:16px;background:#111;color:#fff;padding:.8rem 1rem;border-radius:12px;opacity:0;transform:translateY(12px);transition:.25s}
+    .toast.show{opacity:1;transform:none}
+  /* Social icon buttons */
+  .icon-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem .85rem;border-radius:12px;background:rgba(255,255,255,.95);border:1px solid rgba(163,39,56,.2);box-shadow:0 1px 2px rgba(0,0,0,.06);text-decoration:none;cursor:pointer}
+  .icon-btn:hover{background:#fff}
+  .icon{width:20px;height:20px;display:block}
+  .icon-ln{color:#0a66c2}
+  .icon-ig{color:#c13584}
+  .icon-x{color:#111}
+</style>
+</head>
+<body>
+  <div class="aurora" aria-hidden="true"></div>
+  
+  <!-- ====== HEADER ====== -->
+  <header>
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;height:64px;">
+      <div class="brand">
+        <div class="logo-word">YPSF</div>
+        <div class="speed-lines" aria-hidden="true"></div>
+        <div class="sr-only">Youth Publications & Socioeconomic Forum</div>
+      </div>
+      <nav>
+        <div class="nav-wrap">
+          <a href="#home" class="active">Home</a>
+          <a href="#about">About</a>
+          <a href="#team">Team</a>
+          <a href="#programs">Programs</a>
+          <a href="#advocacy">Advocacy</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#registration">Registration</a>
+          <a href="#apply">Apply</a>
+          <a href="#involved">Get Involved</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <button class="nav-toggle btn btn-ghost" onclick="toggleMenu()">☰</button>
+      </nav>
+    </div>
+  </header>
+  <div id="mobileMenu" class="container" style="display:none;padding-top:10px">
+    <div class="card" style="padding:10px;display:grid;gap:8px">
+      <a href="#home" onclick="closeMenu()">Home</a>
+      <a href="#about" onclick="closeMenu()">About</a>
+      <a href="#team" onclick="closeMenu()">Team</a>
+      <a href="#programs" onclick="closeMenu()">Programs</a>
+      <a href="#advocacy" onclick="closeMenu()">Advocacy</a>
+      <a href="#gallery" onclick="closeMenu()">Gallery</a>
+      <a href="#registration" onclick="closeMenu()">Registration</a>
+      <a href="#apply" onclick="closeMenu()">Apply</a>
+      <a href="#involved" onclick="closeMenu()">Get Involved</a>
+      <a href="#contact" onclick="closeMenu()">Contact</a>
+    </div>
+  </div>
+
+  <!-- ====== HOME ====== -->
+  <section id="home" class="hero">
+    <div class="container grid grid-2" style="align-items:center">
+      <div>
+        <div class="eyebrow">SDG 4 • SDG 8</div>
+        <h1><span style="background:linear-gradient(90deg,var(--brand2),var(--brand3),var(--brand4));-webkit-background-clip:text;background-clip:text;color:transparent">Youth-led advocacy, research, and action</span> for education and decent work.</h1>
+        <p>YPSF empowers young people and partners to create brighter futures. We mobilize networks, publish evidence, and collaborate with institutions to turn policy into practice.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:14px">
+          <a href="#apply" class="btn btn-grad">Apply to YPSF</a>
+          <a href="#programs" class="btn btn-outline">Explore Programs</a>
+        </div>
+        <div style="margin-top:16px;color:#7a0e23;font-weight:600;display:flex;gap:8px;flex-wrap:wrap">
+          <span class="ring" style="padding:.35rem .6rem;border-radius:999px;background:rgba(255,255,255,.85)">Global network</span>
+          <span class="ring" style="padding:.35rem .6rem;border-radius:999px;background:rgba(255,255,255,.85)">Policy & publications</span>
+          <span class="ring" style="padding:.35rem .6rem;border-radius:999px;background:rgba(255,255,255,.85)">Local projects</span>
+          <span class="ring" style="padding:.35rem .6rem;border-radius:999px;background:rgba(255,255,255,.85)">Partnerships</span>
+        </div>
+      </div>
+      <div class="grid grid-2">
+        <div class="ph">Photo 1</div>
+        <div class="ph">Photo 2</div>
+        <div class="ph">Photo 3</div>
+        <div class="ph">Photo 4</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== WHAT WE DO ====== -->
+  <section>
+    <div class="container">
+      <div class="eyebrow">What we do</div>
+      <h2 class="grad">Advocacy, research, and on‑the‑ground impact</h2>
+      <div class="grid grid-3">
+        <div class="card accent-ring" style="padding:18px">
+          <h3>Policy Advocacy</h3>
+          <p>Youth speak at forums and consultations; we translate insights into actionable policy briefs.</p>
+        </div>
+        <div class="card accent-ring" style="padding:18px">
+          <h3>Publications</h3>
+          <p>Evidence‑based reports, op-eds, and youth‑led research projects to inform decision makers.</p>
+        </div>
+        <div class="card accent-ring" style="padding:18px">
+          <h3>Programs & Projects</h3>
+          <p>Fellowships, workshops, and community pilots that deliver measurable outcomes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== ABOUT ====== -->
+  <section id="about">
+    <div class="container grid grid-2" style="align-items:start">
+      <div>
+        <div class="eyebrow">About YPSF</div>
+        <h2>Creating brighter futures, together</h2>
+        <p>Youth Publications & Socioeconomic Forum (YPSF) is a youth‑driven NGO dedicated to advancing inclusive education and decent work. We convene young leaders, researchers, educators, employers, and public institutions to co‑create solutions that improve lives.</p>
+        <p>Our model blends policy advocacy, publications, and hands‑on programs. We elevate youth perspectives in global and local decision‑making and invest in projects that show real‑world results.</p>
+        <ul style="color:var(--muted);padding-left:18px;line-height:1.7">
+          <li>Inclusive governance and transparent decision‑making</li>
+          <li>Open collaboration with networks and partner NGOs</li>
+          <li>Ethical standards, safeguarding, and data privacy</li>
+        </ul>
+        <div class="card accent-ring" style="padding:16px;margin-top:12px">
+          <h3>Our Mission</h3>
+          <p>To amplify youth voices through research, publications, and action that advances quality education and decent work.</p>
+          <h3>Our Vision</h3>
+          <p>A world where young people shape policy and opportunity in every community.</p>
+          <h3>Core Values</h3>
+          <p>Integrity • Inclusion • Evidence • Collaboration • Impact.</p>
+        </div>
+      </div>
+      <div class="grid grid-2">
+        <div class="ph">About – group</div>
+        <div class="ph">About – event</div>
+        <div class="ph">About – workshop</div>
+        <div class="ph">About – panel</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== TEAM ====== -->
+  <section id="team">
+    <div class="container">
+      <div class="eyebrow">Our team</div>
+      <h2>Youth leaders and partners</h2>
+      <div class="grid grid-3">
+        <div class="card" style="padding:18px"><div class="ph" style="aspect-ratio:1/1">Headshot 1</div><div style="font-weight:700;margin-top:8px">Director (Placeholder)</div><p>Governing Committee</p></div>
+        <div class="card" style="padding:18px"><div class="ph" style="aspect-ratio:1/1">Headshot 2</div><div style="font-weight:700;margin-top:8px">Programs Lead</div><p>Fellowships & Projects</p></div>
+        <div class="card" style="padding:18px"><div class="ph" style="aspect-ratio:1/1">Publications Lead</div><div style="font-weight:700;margin-top:8px">Research & Editorial</div><p>—</p></div>
+        <div class="card" style="padding:18px"><div class="ph" style="aspect-ratio:1/1">Partnerships Lead</div><div style="font-weight:700;margin-top:8px">External Relations</div><p>—</p></div>
+        <div class="card" style="padding:18px"><div class="ph" style="aspect-ratio:1/1">Operations Lead</div><div style="font-weight:700;margin-top:8px">Budget & Compliance</div><p>—</p></div>
+        <div class="card" style="padding:18px"><div class="ph" style="aspect-ratio:1/1">Communications Lead</div><div style="font-weight:700;margin-top:8px">Media & Outreach</div><p>—</p></div>
+      </div>
+      <p style="font-size:14px;margin-top:12px;color:var(--muted)">* Replace placeholders with names, bios, and headshots. Add Advisory Council and Regional Coordinators as needed.</p>
+    </div>
+  </section>
+
+  <!-- ====== PROGRAMS ====== -->
+  <section id="programs">
+    <div class="container grid grid-2" style="align-items:start">
+      <div>
+        <div class="eyebrow">Flagship</div>
+        <h2>YPSF Fellowship Programme</h2>
+        <p>A hands‑on experience to research, tell your story, and deliver a public output aligned to SDG 4 and SDG 8. Fellows receive mentorship, publish updates, and present their work at an open forum.</p>
+        <ul style="color:var(--muted);padding-left:18px;line-height:1.7">
+          <li>Personalized mentorship and peer cohort sessions</li>
+          <li>Monthly opportunities to publish updates</li>
+          <li>Deliverable showcased via our public channels</li>
+          <li>Access to panels, roundtables, and partner events</li>
+        </ul>
+        <div style="margin-top:12px"><a href="#apply" class="btn btn-grad">Apply now</a></div>
+      </div>
+      <div class="grid grid-2">
+        <div class="ph">Fellowship – cohort</div>
+        <div class="ph">Fellowship – presentation</div>
+        <div class="ph">Fellowship – workshop</div>
+        <div class="ph">Fellowship – community</div>
+      </div>
+    </div>
+    <div class="container" style="margin-top:24px">
+      <div class="eyebrow">Also</div>
+      <div class="grid grid-3">
+        <div class="card accent-ring" style="padding:18px"><h3>Workshops</h3><p>Upskilling youth on research, advocacy, and employability.</p></div>
+        <div class="card accent-ring" style="padding:18px"><h3>Publications Lab</h3><p>Youth‑led briefs and reports with editorial support.</p></div>
+        <div class="card accent-ring" style="padding:18px"><h3>Partnership Pilots</h3><p>Joint projects with schools, NGOs, and employers.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== IMPACT ====== -->
+  <section id="impact">
+    <div class="container">
+      <div class="eyebrow">Impact so far</div>
+      <h2>Reach & momentum (placeholders)</h2>
+      <div class="grid grid-3">
+        <div class="card" style="padding:16px;text-align:center"><div style="font-size:28px;font-weight:900;color:#7a0e23">30+</div><div>Fellows supported</div></div>
+        <div class="card" style="padding:16px;text-align:center"><div style="font-size:28px;font-weight:900;color:#7a0e23">12</div><div>Countries represented</div></div>
+        <div class="card" style="padding:16px;text-align:center"><div style="font-size:28px;font-weight:900;color:#7a0e23">50k+</div><div>Readers reached</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== ADVOCACY ====== -->
+  <section id="advocacy">
+    <div class="container">
+      <div class="eyebrow">Policy focus</div>
+      <h2>Advocacy points</h2>
+      <ul style="color:var(--muted);padding-left:18px;line-height:1.8">
+        <li>Quality Education: access, relevance, and learner‑centered approaches.</li>
+        <li>Decent Work & Economic Growth: youth employability, entrepreneurship, and safe workplaces.</li>
+        <li>Meaningful Youth Engagement: representation in decision‑making at all levels.</li>
+        <li>Evidence‑based Policy: data, evaluation, and transparency.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ====== GALLERY (6 placeholders) ====== -->
+  <section id="gallery">
+    <div class="container">
+      <div class="eyebrow">Media</div>
+      <h2>Photo gallery</h2>
+      <div class="grid grid-3">
+        <div class="ph">Gallery 1</div>
+        <div class="ph">Gallery 2</div>
+        <div class="ph">Gallery 3</div>
+        <div class="ph">Gallery 4</div>
+        <div class="ph">Gallery 5</div>
+        <div class="ph">Gallery 6</div>
+      </div>
+      <p style="font-size:14px;margin-top:12px;color:var(--muted)">Replace with your six high‑resolution images.</p>
+    </div>
+  </section>
+
+  <!-- ====== REGISTRATION ====== -->
+  <section id="registration">
+    <div class="container">
+      <div class="eyebrow">Compliance</div>
+      <h2>Registration & Governance</h2>
+      <div class="grid grid-3">
+        <div class="card accent-ring" style="padding:18px">
+          <h3>Legal Registration</h3>
+          <p>Jurisdiction, registration number, and date. Upload certificate (PDF).</p>
+          <ul style="padding-left:18px;color:var(--muted)">
+            <li>Registration No.: <span style="opacity:.7">(placeholder)</span></li>
+            <li>Jurisdiction: <span style="opacity:.7">(placeholder)</span></li>
+          </ul>
+        </div>
+        <div class="card accent-ring" style="padding:18px">
+          <h3>Policies</h3>
+          <ul style="padding-left:18px;color:var(--muted);line-height:1.7">
+            <li>By‑laws / Constitution (PDF)</li>
+            <li>Safeguarding & Code of Conduct</li>
+            <li>Data Protection & Privacy</li>
+            <li>Anti‑corruption & Conflict of Interest</li>
+          </ul>
+        </div>
+        <div class="card accent-ring" style="padding:18px">
+          <h3>Affiliations</h3>
+          <p>List partner networks or UN‑affiliated groups and upload letters of recognition.</p>
+          <ul style="padding-left:18px;color:var(--muted)">
+            <li>Affiliation 1 (placeholder)</li>
+            <li>Affiliation 2 (placeholder)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== APPLY ====== -->
+  <section id="apply">
+    <div class="container">
+      <div class="eyebrow">Join us</div>
+      <h2>Apply to YPSF</h2>
+      <p>There is no deadline — fill it out whenever you're ready.</p>
+      <form id="applyForm" class="card accent-ring" style="padding:18px;display:grid;gap:14px">
+        <div class="grid grid-2">
+          <label>Full name<br><input required name="name" class="ring" style="width:100%;border-radius:12px;padding:.7rem"/></label>
+          <label>Email<br><input required type="email" name="email" class="ring" style="width:100%;border-radius:12px;padding:.7rem"/></label>
+          <label>Country / Region<br><input name="country" class="ring" style="width:100%;border-radius:12px;padding:.7rem"/></label>
+          <label>Interests (e.g., SDG 4, SDG 8, research, events)<br><input name="interests" class="ring" style="width:100%;border-radius:12px;padding:.7rem"/></label>
+        </div>
+        <label>Why do you want to join?<br><textarea required name="motivation" rows="6" class="ring" style="width:100%;border-radius:12px;padding:.7rem"></textarea></label>
+        <label style="display:flex;align-items:center;gap:8px"><input type="checkbox" name="consent"/> I agree to be contacted by YPSF regarding my application.</label>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button type="submit" class="btn btn-grad">Submit application</button>
+          <button type="button" id="downloadBtn" class="btn btn-ghost ring">Download as JSON</button>
+          <a id="emailLink" class="btn btn-ghost ring" href="#">Email to YPSF</a>
+        </div>
+        <div id="applyNote" style="display:none;color:#166534;background:#ecfdf5;border:1px solid #bbf7d0;padding:.7rem;border-radius:12px">Thank you — your application was saved locally on this device. You can also download or email it above.</div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ====== GET INVOLVED ====== -->
+  <section id="involved">
+    <div class="container">
+      <div class="eyebrow">Take part</div>
+      <h2>Get involved</h2>
+      <div class="grid grid-3">
+        <div class="card accent-ring" style="padding:18px"><h3>Volunteer</h3><p>Contribute skills in research, writing, facilitation, or ops.</p><a href="#apply" class="btn btn-grad">Apply to volunteer</a></div>
+        <div class="card accent-ring" style="padding:18px"><h3>Partner</h3><p>Co‑host workshops, co‑author briefs, or launch pilots.</p><a href="#contact" class="btn btn-ghost ring">Contact us</a></div>
+        <div class="card accent-ring" style="padding:18px"><h3>Donate</h3><p>Support youth‑led projects and publications.</p><a href="#contact" class="btn btn-ghost ring">Request details</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CONTACT ====== -->
+  <section id="contact">
+    <div class="container grid grid-2">
+      <div class="card accent-ring" style="padding:18px">
+        <h3>Get in touch</h3>
+        <p>Use email (placeholder): <span style="font-family:ui-monospace,Menlo,Consolas,monospace">info@ypsf.org</span></p>
+        <p>We usually respond within a few days.</p>
+      </div>
+      <div class="card accent-ring" style="padding:18px">
+        <h3>Social media</h3>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a class="icon-btn" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/company/ypsf/posts/?feedView=all" aria-label="YPSF on LinkedIn">
+            <svg viewBox="0 0 24 24" class="icon icon-ln" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5.001ZM3 8.982h3.96V21H3zM9.75 8.982H13.5v1.637h.05c.52-.986 1.79-2.024 3.69-2.024 3.95 0 4.68 2.6 4.68 5.983V21H17.96v-5.36c0-1.278-.024-2.922-1.78-2.922-1.78 0-2.054 1.39-2.054 2.827V21H9.75z"/></svg>
+            <span>LinkedIn</span>
+          </a>
+          <a class="icon-btn" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/ypsforum/" aria-label="YPSF on Instagram">
+            <svg viewBox="0 0 24 24" class="icon icon-ig" aria-hidden="true"><path fill="currentColor" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5Zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5Zm6.25-3.25a1.25 1.25 0 1 1-1.25 1.25 1.25 1.25 0 0 1 1.25-1.25Z"/></svg>
+            <span>Instagram</span>
+          </a>
+          <a class="icon-btn" target="_blank" rel="noopener noreferrer" href="https://x.com/ypsforum?lang=ar" aria-label="YPSF on X">
+            <svg viewBox="0 0 24 24" class="icon icon-x" aria-hidden="true"><path fill="currentColor" d="M3 3h4.6l4.07 6.39L16.86 3H21l-7.3 9.1L21 21h-4.6l-4.35-6.83L7.14 21H3l7.44-9.2Z"/></svg>
+            <span>X</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
+  <footer>
+    <div class="container" style="padding:28px 20px">
+      <div style="display:grid;gap:18px;grid-template-columns:repeat(4,minmax(0,1fr))">
+        <div>
+          <div class="brand"><div class="logo-word">YPSF</div><div class="speed-lines" aria-hidden="true"></div></div>
+          <p style="color:#fff;opacity:.85;margin-top:8px">Youth-led network advancing education quality and decent work through advocacy, research, and on-the-ground initiatives.</p>
+        </div>
+        <div>
+          <div style="font-weight:800;margin-bottom:8px">Explore</div>
+          <p style="opacity:.85">About • Team • Programs • Advocacy<br>Gallery • Registration • Apply<br>Get Involved • Contact</p>
+        </div>
+        <div>
+          <div style="font-weight:800;margin-bottom:8px">Contact</div>
+          <p style="opacity:.85">info@ypsf.org (placeholder)<br>Global • Remote-first</p>
+        </div>
+        <div>
+          <div style="font-weight:800;margin-bottom:8px">Social</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <a class="icon-btn" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/company/ypsf/posts/?feedView=all" aria-label="YPSF on LinkedIn"><svg viewBox="0 0 24 24" class="icon icon-ln" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5.001ZM3 8.982h3.96V21H3zM9.75 8.982H13.5v1.637h.05c.52-.986 1.79-2.024 3.69-2.024 3.95 0 4.68 2.6 4.68 5.983V21H17.96v-5.36c0-1.278-.024-2.922-1.78-2.922-1.78 0-2.054 1.39-2.054 2.827V21H9.75z"/></svg><span>LinkedIn</span></a>
+            <a class="icon-btn" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/ypsforum/" aria-label="YPSF on Instagram"><svg viewBox="0 0 24 24" class="icon icon-ig" aria-hidden="true"><path fill="currentColor" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5Zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5Zm6.25-3.25a1.25 1.25 0 1 1-1.25 1.25 1.25 1.25 0 0 1 1.25-1.25Z"/></svg><span>Instagram</span></a>
+            <a class="icon-btn" target="_blank" rel="noopener noreferrer" href="https://x.com/ypsforum?lang=ar" aria-label="YPSF on X"><svg viewBox="0 0 24 24" class="icon icon-x" aria-hidden="true"><path fill="currentColor" d="M3 3h4.6l4.07 6.39L16.86 3H21l-7.3 9.1L21 21h-4.6l-4.35-6.83L7.14 21H3l7.44-9.2Z"/></svg><span>X</span></a>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:14px;font-size:12px;opacity:.85">© <span id="year"></span> Youth Publications & Socioeconomic Forum (YPSF). All rights reserved.</div>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast">Saved locally</div>
+
+  <script>
+    // Year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Smooth scroll + active link
+    const links = Array.from(document.querySelectorAll('nav a'));
+    const setActive = () => {
+      let hash = location.hash || '#home';
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === hash));
+    };
+    window.addEventListener('hashchange', setActive);
+    setActive();
+
+    // Mobile menu
+    function toggleMenu(){
+      const el = document.getElementById('mobileMenu');
+      el.style.display = el.style.display === 'none' || !el.style.display ? 'block' : 'none';
+    }
+    function closeMenu(){document.getElementById('mobileMenu').style.display='none'}
+    window.toggleMenu = toggleMenu; window.closeMenu = closeMenu;
+
+    // APPLICATION FORM logic
+    const form = document.getElementById('applyForm');
+    const emailLink = document.getElementById('emailLink');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const note = document.getElementById('applyNote');
+    const toast = document.getElementById('toast');
+
+    function getData(){
+      const fd = new FormData(form);
+      const obj = {};
+      for (const [k,v] of fd.entries()) obj[k] = v;
+      obj.consent = form.querySelector('input[name="consent"]').checked;
+      return obj;
+    }
+
+    function showToast(msg){
+      toast.textContent = msg; toast.classList.add('show');
+      setTimeout(()=> toast.classList.remove('show'), 1800);
+    }
+
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const data = getData();
+      localStorage.setItem('ypsf_application_' + Date.now(), JSON.stringify(data, null, 2));
+      note.style.display = 'block';
+      showToast('Application saved locally');
+    });
+
+    downloadBtn.addEventListener('click', ()=>{
+      const data = getData();
+      const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'YPSF_Application_' + (data.name || 'applicant') + '.json';
+      a.click(); URL.revokeObjectURL(url);
+    });
+
+    emailLink.addEventListener('click', (e)=>{
+      e.preventDefault();
+      const data = encodeURIComponent(JSON.stringify(getData(), null, 2));
+      const name = encodeURIComponent((new FormData(form).get('name')) || 'Applicant');
+      location.href = `mailto:info@ypsf.org?subject=YPSF%20Application%20-%20${name}&body=${data}`;
+    });
+
+    // Default section if no hash
+    if(!location.hash) location.hash = '#home';
+  </script>
+</body>
+</html>
