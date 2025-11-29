@@ -665,29 +665,6 @@
             background: rgba(255, 255, 255, 0.2);
         }
         
-        /* Make Apply button stand out in navbar */
-        .nav-apply-btn {
-            background: rgba(255, 255, 255, 0.25) !important;
-            border: 2px solid rgba(255, 255, 255, 0.5) !important;
-            border-radius: var(--radius-md) !important;
-            padding: var(--spacing-xs) var(--spacing-md) !important;
-            font-weight: 700 !important;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
-            transition: all var(--transition-base) !important;
-        }
-        
-        .nav-apply-btn:hover {
-            background: rgba(255, 255, 255, 0.35) !important;
-            border-color: rgba(255, 255, 255, 0.8) !important;
-            transform: translateY(-2px) !important;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
-        }
-        
-        .nav-apply-btn.active {
-            background: rgba(255, 255, 255, 0.3) !important;
-            border-color: white !important;
-        }
-        
         .mobile-menu-toggle {
             display: none;
             background: rgba(255, 255, 255, 0.2);
@@ -3143,7 +3120,7 @@
                     <li><a href="resources.html">Resources</a></li>
                     <li><a href="events.html">Events</a></li>
                     <li><a href="faq.html">FAQ</a></li>
-                    <li><a href="apply.html" class="nav-apply-btn">Apply</a></li>
+                    <li><a href="index.html#apply">Apply</a></li>
                     <li><a href="index.html#contact">Contact</a></li>
                 </ul>
                 <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">☰</button>
@@ -3162,7 +3139,7 @@
                         Youth Publications & Socioeconomic Forum (YPSF) is a youth-driven organization dedicated to advancing inclusive education and decent work through advocacy, research, and action. We mobilize networks, publish evidence, and collaborate with institutions to turn policy into practice.
                     </p>
                     <div class="hero-actions">
-                        <a href="apply.html" class="btn btn-primary">Apply to YPSF</a>
+                        <a href="#apply" class="btn btn-primary">Apply to YPSF</a>
                         <a href="#programs" class="btn btn-secondary">Explore Programs</a>
         </div>
         </div>
@@ -3388,7 +3365,7 @@
                     </ul>
                     
                     <div style="margin-top: 2rem;">
-                        <a href="apply.html" class="btn btn-primary">Apply Now</a>
+                        <a href="#apply" class="btn btn-primary">Apply Now</a>
 </div>
     </div>
                 <div class="grid grid-2 fade-in-scroll">
@@ -3523,43 +3500,108 @@
     </div>
   </section>
 
-    <!-- Application CTA Section -->
+    <!-- Application Section -->
     <section id="apply" class="section">
-        <div class="container">
+    <div class="container">
             <div class="section-header">
                 <span class="section-eyebrow">Join Us</span>
                 <h2 class="section-title">Apply to YPSF</h2>
                 <p class="section-subtitle">Ready to make a difference? Apply to join our fellowship program or become a volunteer</p>
-            </div>
-            <div class="card card-accent" style="max-width: 800px; margin: 0 auto; text-align: center; padding: 4rem 3rem;">
-                <h3 style="margin-bottom: 1.5rem; font-size: 2rem;">Start Your Application</h3>
-                <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 2rem; color: var(--ink);">
-                    Whether you're interested in our Fellowship Programme, workshops, publications lab, or volunteering opportunities, we'd love to hear from you. Our application process is straightforward and we review applications on a rolling basis.
-                </p>
-                <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
-                    <a href="apply.html" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2.5rem;">Apply Now</a>
-                    <a href="faq.html" class="btn btn-outline" style="font-size: 1.1rem; padding: 1rem 2.5rem;">Learn More</a>
-                </div>
-                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--glass-border);">
-                    <h4 style="margin-bottom: 1rem; font-size: 1.3rem;">What to Expect</h4>
-                    <div class="grid grid-3" style="gap: 1.5rem; text-align: left; margin-top: 1.5rem;">
-                        <div>
-                            <div style="font-weight: 700; color: var(--red-medium); margin-bottom: 0.5rem; font-size: 1.1rem;">✓ Quick Application</div>
-                            <p style="font-size: 0.95rem; color: var(--muted); margin: 0;">Simple form that takes about 10-15 minutes to complete</p>
+        </div>
+            <div class="application-form">
+                <form id="applicationForm" class="card">
+                    <div class="form-group">
+                        <label for="fullName">Full Name *</label>
+                        <input type="text" id="fullName" name="fullName" required>
+        </div>
+                    
+        <div class="grid grid-2">
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+        </div>
+    </div>
+                    
+                    <div class="grid grid-2">
+                        <div class="form-group">
+                            <label for="country">Country / Region *</label>
+                            <input type="text" id="country" name="country" required>
                         </div>
-                        <div>
-                            <div style="font-weight: 700; color: var(--red-medium); margin-bottom: 0.5rem; font-size: 1.1rem;">✓ Rolling Review</div>
-                            <p style="font-size: 0.95rem; color: var(--muted); margin: 0;">No deadlines - we review applications regularly throughout the year</p>
-                        </div>
-                        <div>
-                            <div style="font-weight: 700; color: var(--red-medium); margin-bottom: 0.5rem; font-size: 1.1rem;">✓ Fast Response</div>
-                            <p style="font-size: 0.95rem; color: var(--muted); margin: 0;">We'll get back to you within 2-3 weeks of your submission</p>
+                        
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" id="city" name="city">
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                    
+                    <div class="form-group">
+                        <label for="program">Program Interest *</label>
+                        <select id="program" name="program" required>
+                            <option value="">Select a program</option>
+                            <option value="fellowship">YPSF Fellowship Programme</option>
+                            <option value="workshop">Workshops</option>
+                            <option value="publications">Publications Lab</option>
+                            <option value="partnership">Partnership Pilots</option>
+                            <option value="volunteer">Volunteer</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="interests">Areas of Interest</label>
+                        <input type="text" id="interests" name="interests" placeholder="e.g., SDG 4, SDG 8, research, advocacy, events">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="background">Background & Experience</label>
+                        <textarea id="background" name="background" placeholder="Tell us about your educational background, work experience, and relevant skills"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="motivation">Why do you want to join YPSF? *</label>
+                        <textarea id="motivation" name="motivation" required placeholder="Share your motivation and what you hope to achieve"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="goals">What are your goals and how do they align with YPSF's mission?</label>
+                        <textarea id="goals" name="goals" placeholder="Describe your goals and how they connect to our work"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="availability">Availability & Commitment</label>
+                        <textarea id="availability" name="availability" placeholder="How many hours per week can you commit? What is your availability?"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="form-checkbox">
+                            <input type="checkbox" id="consent" name="consent" required>
+                            <label for="consent">I agree to be contacted by YPSF regarding my application and consent to the processing of my personal data *</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="form-checkbox">
+                            <input type="checkbox" id="newsletter" name="newsletter">
+                            <label for="newsletter">I would like to receive updates and newsletters from YPSF</label>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
+                        <button type="submit" class="btn btn-primary form-submit" style="flex: 1; min-width: 200px;">Submit Application</button>
+                        <button type="button" id="downloadApplicationBtn" class="btn btn-secondary" style="flex: 1; min-width: 200px;">Download as JSON</button>
+                        <button type="button" id="emailApplicationBtn" class="btn btn-outline" style="flex: 1; min-width: 200px;">Email Application</button>
+                    </div>
+                    
+                    <div id="formMessage" style="display: none; margin-top: 1rem; padding: 1rem; background: #ecfdf5; border: 1px solid #bbf7d0; border-radius: 8px; color: #166534;"></div>
+                </form>
+      </div>
+    </div>
+  </section>
 
     <!-- Contact Section -->
     <section id="contact" class="section section-alt">
@@ -3872,7 +3914,7 @@
                     <p><a href="faq.html">FAQ</a></p>
                     <p><a href="partners.html">Partners</a></p>
                     <p><a href="news.html">News</a></p>
-                    <p><a href="apply.html">Apply</a></p>
+                    <p><a href="index.html#apply">Apply</a></p>
                     <p><a href="index.html#contact">Contact</a></p>
         </div>
                 <div class="footer-section">
@@ -3881,7 +3923,7 @@
                     <p><a href="#programs">Workshops</a></p>
                     <p><a href="#programs">Publications Lab</a></p>
                     <p><a href="#programs">Partnership Pilots</a></p>
-                    <p><a href="apply.html">Volunteer Opportunities</a></p>
+                    <p><a href="#apply">Volunteer Opportunities</a></p>
           </div>
                 <div class="footer-section">
                     <h3>Contact</h3>
