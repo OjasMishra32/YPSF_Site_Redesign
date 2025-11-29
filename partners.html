@@ -575,33 +575,45 @@
         
         .logo {
             display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
+            flex-direction: column;
+            align-items: flex-start;
             color: white;
-            font-weight: 900;
-            font-size: 1.5rem;
             text-decoration: none;
             transition: transform var(--transition-base);
+            gap: 0.25rem;
         }
         
         .logo:hover {
-            transform: scale(1.05);
+            transform: scale(1.02);
+        }
+        .logo-acronym {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 2rem;
+            letter-spacing: -0.05em;
+            color: #e04a59;
+            text-shadow: 
+                2px 2px 0px #7a0e23,
+                1px 1px 0px #7a0e23,
+                0px 0px 0px #7a0e23;
+            line-height: 1;
+            margin: 0;
         }
         
-        .logo-image {
-            width: 40px;
-            height: 40px;
-            border-radius: var(--radius-sm);
+        .logo-full-name {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 400;
+            color: white;
+            line-height: 1.2;
+            margin: 0;
+            white-space: nowrap;
         }
         
-        .logo-text {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            background: linear-gradient(180deg, #ffffff 0%, #ffd6dd 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+        
+        
+        
+        
         
         nav {
             display: flex;
@@ -3071,9 +3083,9 @@
 <!-- Header -->
     <header id="header">
         <div class="header-content">
-            <a href="#home" class="logo">
-                <img src="MGCY.png" alt="YPSF Logo" class="logo-image">
-                <span class="logo-text">YPSF</span>
+            <a href="index.html" class="logo">
+                <div class="logo-acronym">YPSF</div>
+                <div class="logo-full-name">Youth Publications &<br>Socioeconomic Forum</div>
             </a>
       <nav>
                 <ul class="nav-links" id="navLinks">
