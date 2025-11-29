@@ -3069,7 +3069,30 @@
         }
         
 
-    </style>
+    
+        /* Make Apply button stand out in navbar */
+        .nav-apply-btn {
+            background: rgba(255, 255, 255, 0.25) !important;
+            border: 2px solid rgba(255, 255, 255, 0.5) !important;
+            border-radius: var(--radius-md) !important;
+            padding: var(--spacing-xs) var(--spacing-md) !important;
+            font-weight: 700 !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+            transition: all var(--transition-base) !important;
+        }
+        
+        .nav-apply-btn:hover {
+            background: rgba(255, 255, 255, 0.35) !important;
+            border-color: rgba(255, 255, 255, 0.8) !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+        }
+        
+        .nav-apply-btn.active {
+            background: rgba(255, 255, 255, 0.3) !important;
+            border-color: white !important;
+        }
+        </style>
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -3098,7 +3121,7 @@
                     <li><a href="resources.html">Resources</a></li>
                     <li><a href="events.html" class="active">Events</a></li>
                     <li><a href="faq.html">FAQ</a></li>
-                    <li><a href="apply.html">Apply</a></li>
+                    <li><a href="apply.html" class="nav-apply-btn">Apply</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
                 <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">☰</button>
@@ -3238,7 +3261,7 @@
                     <p><a href="resources">Resources</a></p>
                     <p><a href="events">Events</a></p>
                     <p><a href="faq">FAQ</a></p>
-                    <p><a href="apply">Apply</a></p>
+                    <p><a href="apply.html" class="nav-apply-btn">Apply</a></p>
                     <p><a href="contact">Contact</a></p>
         </div>
                 <div class="footer-section">
