@@ -575,39 +575,25 @@
         
         .logo {
             display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            color: white;
+            align-items: center;
             text-decoration: none;
             transition: transform var(--transition-base);
-            gap: 0.25rem;
         }
         
         .logo:hover {
             transform: scale(1.02);
         }
-        .logo-acronym {
-            font-family: 'Inter', sans-serif;
-            font-weight: 900;
-            font-size: 2rem;
-            letter-spacing: -0.05em;
-            color: #e04a59;
-            text-shadow: 
-                2px 2px 0px #7a0e23,
-                1px 1px 0px #7a0e23,
-                0px 0px 0px #7a0e23;
-            line-height: 1;
-            margin: 0;
+        
+        .logo-image {
+            height: 60px;
+            width: auto;
+            display: block;
         }
         
-        .logo-full-name {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 400;
-            color: white;
-            line-height: 1.2;
-            margin: 0;
-            white-space: nowrap;
+        @media (max-width: 768px) {
+            .logo-image {
+                height: 50px;
+            }
         }
         
         
@@ -3073,8 +3059,7 @@
     <header id="header">
         <div class="header-content">
             <a href="index.html" class="logo">
-                <div class="logo-acronym">YPSF</div>
-                <div class="logo-full-name">Youth Publications &<br>Socioeconomic Forum</div>
+                <img src="ypsf-logo.svg" alt="YPSF - Youth Publications & Socioeconomic Forum" class="logo-image">
             </a>
       <nav>
                 <ul class="nav-links" id="navLinks">

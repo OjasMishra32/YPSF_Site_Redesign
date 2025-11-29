@@ -582,40 +582,25 @@
         
         .logo {
             display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            color: white;
+            align-items: center;
             text-decoration: none;
             transition: transform var(--transition-base);
-            gap: 0.25rem;
         }
         
         .logo:hover {
             transform: scale(1.02);
         }
         
-        .logo-acronym {
-            font-family: 'Inter', sans-serif;
-            font-weight: 900;
-            font-size: 2rem;
-            letter-spacing: -0.05em;
-            color: #e04a59;
-            text-shadow: 
-                2px 2px 0px #7a0e23,
-                1px 1px 0px #7a0e23,
-                0px 0px 0px #7a0e23;
-            line-height: 1;
-            margin: 0;
+        .logo-image {
+            height: 60px;
+            width: auto;
+            display: block;
         }
         
-        .logo-full-name {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 400;
-            color: white;
-            line-height: 1.2;
-            margin: 0;
-            white-space: nowrap;
+        @media (max-width: 768px) {
+            .logo-image {
+                height: 50px;
+            }
         }
         
         nav {
@@ -1380,12 +1365,8 @@
                 width: 100%;
             }
             
-            .logo-acronym {
-                font-size: 1.5rem;
-            }
-            
-            .logo-full-name {
-                font-size: 0.65rem;
+            .logo-image {
+                height: 45px;
             }
             
             .header-content {
@@ -1472,12 +1453,8 @@
                 padding: 1.25rem;
             }
             
-            .logo-acronym {
-                font-size: 1.25rem;
-            }
-            
-            .logo-full-name {
-                font-size: 0.6rem;
+            .logo-image {
+                height: 40px;
             }
             
             .stats-grid {
@@ -3312,8 +3289,7 @@
     <header id="header">
         <div class="header-content">
             <a href="index.html" class="logo">
-                <div class="logo-acronym">YPSF</div>
-                <div class="logo-full-name">Youth Publications &<br>Socioeconomic Forum</div>
+                <img src="ypsf-logo.svg" alt="YPSF - Youth Publications & Socioeconomic Forum" class="logo-image">
             </a>
       <nav>
                 <ul class="nav-links" id="navLinks">
@@ -3334,7 +3310,162 @@
     </div>
   </header>
     <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero" style="padding: var(--spacing-3xl) 0; background: linear-gradient(135deg, var(--red-pale) 0%, var(--bg) 100%);">
+            <div class="container">
+                <div class="hero-content" style="text-align: center; max-width: 800px; margin: 0 auto;">
+                    <span class="section-eyebrow" style="display: inline-block; margin-bottom: var(--spacing-md);">Join YPSF</span>
+                    <h1 class="hero-title" style="font-size: 3rem; margin-bottom: var(--spacing-md);">Apply to YPSF</h1>
+                    <p class="hero-subtitle" style="font-size: 1.25rem; color: var(--muted); line-height: 1.8; margin-bottom: var(--spacing-xl);">
+                        Ready to make a difference? Apply to join our fellowship program, participate in workshops, contribute to our publications lab, or become a volunteer. We welcome passionate young leaders from all backgrounds.
+                    </p>
+                </div>
+            </div>
+        </section>
 
+        <!-- Application Form Section -->
+        <section class="section" style="padding: var(--spacing-3xl) 0;">
+            <div class="container">
+                <div class="application-form">
+                    <form id="applicationForm">
+                        <div id="formMessage" style="display: none; padding: var(--spacing-md); border-radius: var(--radius-md); margin-bottom: var(--spacing-lg); border: 2px solid;"></div>
+                        <!-- Program Interest -->
+                        <div class="form-group">
+                            <label for="programInterest">Program Interest *</label>
+                            <select id="programInterest" name="programInterest" required>
+                                <option value="">Select a program...</option>
+                                <option value="fellowship">Fellowship Programme</option>
+                                <option value="workshop">Workshops</option>
+                                <option value="publications">Publications Lab</option>
+                                <option value="volunteer">Volunteer</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <!-- Personal Information -->
+                        <h3 style="margin-top: var(--spacing-2xl); margin-bottom: var(--spacing-md); font-size: 1.5rem; color: var(--ink);">Personal Information</h3>
+                        
+                        <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" required placeholder="Enter your first name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" id="lastName" name="lastName" required placeholder="Enter your last name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="age">Age *</label>
+                            <input type="number" id="age" name="age" required min="18" max="35" placeholder="18-35">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="country">Country/Region *</label>
+                            <input type="text" id="country" name="country" required placeholder="Your country or region">
+                        </div>
+
+                        <!-- Background & Experience -->
+                        <h3 style="margin-top: var(--spacing-2xl); margin-bottom: var(--spacing-md); font-size: 1.5rem; color: var(--ink);">Background & Experience</h3>
+
+                        <div class="form-group">
+                            <label for="currentRole">Current Role/Position</label>
+                            <input type="text" id="currentRole" name="currentRole" placeholder="e.g., Student, Researcher, Advocate, etc.">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="education">Education Background</label>
+                            <input type="text" id="education" name="education" placeholder="e.g., Bachelor's in Education, Master's in Public Policy, etc.">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="experience">Relevant Experience</label>
+                            <textarea id="experience" name="experience" placeholder="Tell us about your experience in education, employment, advocacy, research, or related fields..."></textarea>
+                        </div>
+
+                        <!-- Motivation & Interest -->
+                        <h3 style="margin-top: var(--spacing-2xl); margin-bottom: var(--spacing-md); font-size: 1.5rem; color: var(--ink);">Motivation & Interest</h3>
+
+                        <div class="form-group">
+                            <label for="motivation">Why do you want to join YPSF? *</label>
+                            <textarea id="motivation" name="motivation" required placeholder="Share your motivation for joining YPSF and how you align with our mission..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contribution">How do you plan to contribute? *</label>
+                            <textarea id="contribution" name="contribution" required placeholder="Describe how you plan to contribute to YPSF's work in education and employment..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sdgFocus">Which SDG area interests you most? *</label>
+                            <select id="sdgFocus" name="sdgFocus" required>
+                                <option value="">Select an area...</option>
+                                <option value="sdg4">SDG 4 - Quality Education</option>
+                                <option value="sdg8">SDG 8 - Decent Work and Economic Growth</option>
+                                <option value="both">Both SDG 4 and SDG 8</option>
+                            </select>
+                        </div>
+
+                        <!-- Additional Information -->
+                        <h3 style="margin-top: var(--spacing-2xl); margin-bottom: var(--spacing-md); font-size: 1.5rem; color: var(--ink);">Additional Information</h3>
+
+                        <div class="form-group">
+                            <label for="availability">Availability</label>
+                            <textarea id="availability" name="availability" placeholder="Tell us about your availability and time commitment (e.g., hours per week, preferred schedule)..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="languages">Languages Spoken</label>
+                            <input type="text" id="languages" name="languages" placeholder="e.g., English, Spanish, French, Arabic...">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="additionalInfo">Additional Information</label>
+                            <textarea id="additionalInfo" name="additionalInfo" placeholder="Any additional information you'd like to share..."></textarea>
+                        </div>
+
+                        <!-- How did you hear about us -->
+                        <div class="form-group">
+                            <label for="referral">How did you hear about YPSF?</label>
+                            <select id="referral" name="referral">
+                                <option value="">Select an option...</option>
+                                <option value="social-media">Social Media</option>
+                                <option value="website">Website</option>
+                                <option value="friend-colleague">Friend or Colleague</option>
+                                <option value="partner-organization">Partner Organization</option>
+                                <option value="event">Event or Conference</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <!-- Consent -->
+                        <div class="form-checkbox" style="margin-top: var(--spacing-xl);">
+                            <input type="checkbox" id="consent" name="consent" required>
+                            <label for="consent">I consent to YPSF processing my personal information for the purpose of this application and future communications. *</label>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn btn-primary form-submit" style="font-size: 1.1rem; padding: 1rem 2rem;">
+                            Submit Application
+                        </button>
+
+                        <p style="text-align: center; margin-top: var(--spacing-md); color: var(--muted); font-size: 0.9rem;">
+                            We review applications on a rolling basis and will get back to you within 2-3 weeks.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </section>
     </main>
 <!-- Footer -->
   <footer>
@@ -3586,20 +3717,33 @@
                     data[key] = value;
                 });
                 
+                // Handle checkbox values
+                data.consent = applicationForm.querySelector('#consent').checked;
+                
                 // Save to localStorage
                 const timestamp = new Date().toISOString();
                 const applicationKey = `ypsf_application_${timestamp}`;
                 localStorage.setItem(applicationKey, JSON.stringify(data, null, 2));
                 
+                // Prepare email
+                const applicantName = `${data.firstName || ''} ${data.lastName || ''}`.trim() || 'Applicant';
+                const subject = encodeURIComponent(`YPSF Application - ${applicantName}`);
+                const body = encodeURIComponent(`Dear YPSF Team,\n\nPlease find my application details below:\n\n${JSON.stringify(data, null, 2)}\n\nThank you for your consideration.\n\nBest regards,\n${applicantName}`);
+                
+                // Open email client
+                window.location.href = `mailto:admin@ypsforum.org?subject=${subject}&body=${body}`;
+                
                 // Show success message
                 formMessage.style.display = 'block';
-                formMessage.textContent = 'Thank you! Your application has been submitted successfully. We will review it and get back to you soon.';
+                formMessage.textContent = 'Thank you! Your application has been submitted successfully. We will review it and get back to you within 2-3 weeks.';
                 formMessage.style.background = '#ecfdf5';
                 formMessage.style.borderColor = '#bbf7d0';
                 formMessage.style.color = '#166534';
                 
                 // Show toast
+                if (typeof showToast === 'function') {
                 showToast('Application submitted successfully!');
+                }
                 
                 // Reset form
                 applicationForm.reset();
