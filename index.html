@@ -336,12 +336,19 @@
         @media (max-width: 968px) {
             .grid-2, .grid-3, .grid-4 {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
         }
         
         @media (min-width: 969px) and (max-width: 1200px) {
             .grid-3, .grid-4 {
                 grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .grid {
+                gap: 1.25rem;
             }
         }
         
@@ -679,16 +686,18 @@
         @media (max-width: 968px) {
             .nav-links {
                 display: none;
-                position: absolute;
-                top: 100%;
+                position: fixed;
+                top: 70px;
                 left: 0;
                 right: 0;
                 background: linear-gradient(135deg, var(--red-deep) 0%, var(--red-medium) 100%);
                 flex-direction: column;
-                padding: var(--spacing-md);
+                padding: 1rem;
                 box-shadow: var(--shadow-lg);
                 z-index: 1000;
                 width: 100%;
+                max-height: calc(100vh - 70px);
+                overflow-y: auto;
             }
             
             .nav-links.active {
@@ -702,11 +711,31 @@
             .nav-links a {
                 display: block;
                 width: 100%;
-                padding: var(--spacing-sm) var(--spacing-md);
+                padding: 1rem;
+                font-size: 1rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            .nav-links a:last-child {
+                border-bottom: none;
             }
             
             .mobile-menu-toggle {
                 display: block;
+                font-size: 1.5rem;
+                padding: 0.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nav-links {
+                top: 60px;
+                padding: 0.75rem;
+            }
+            
+            .nav-links a {
+                padding: 0.875rem;
+                font-size: 0.95rem;
             }
         }
         
@@ -1024,6 +1053,7 @@
             margin-bottom: var(--spacing-xs);
             font-weight: 600;
             color: var(--ink);
+            font-size: 0.95rem;
         }
         
         .form-group input,
@@ -1054,17 +1084,55 @@
         
         .form-checkbox {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: var(--spacing-xs);
         }
         
         .form-checkbox input {
             width: auto;
+            margin-top: 0.25rem;
+            flex-shrink: 0;
+        }
+        
+        .form-checkbox label {
+            margin-bottom: 0;
+            font-weight: 400;
+            font-size: 0.9rem;
+            line-height: 1.5;
         }
         
         .form-submit {
             width: 100%;
             margin-top: var(--spacing-lg);
+        }
+        
+        @media (max-width: 768px) {
+            .application-form {
+                max-width: 100%;
+            }
+            
+            .form-group {
+                margin-bottom: 1.25rem;
+            }
+            
+            .form-group input,
+            .form-group textarea,
+            .form-group select {
+                padding: 0.875rem;
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+            
+            .form-group textarea {
+                min-height: 120px;
+            }
+            
+            .form-checkbox {
+                align-items: flex-start;
+            }
+            
+            .form-checkbox label {
+                font-size: 0.875rem;
+            }
         }
 
     /* Footer */
@@ -1252,11 +1320,11 @@
         /* Responsive Utilities */
         @media (max-width: 768px) {
             .container, .container-wide {
-                padding: 0 var(--spacing-md);
+                padding: 0 var(--spacing-sm);
             }
             
             .section {
-                padding: var(--spacing-2xl) 0;
+                padding: 2.5rem 0;
             }
             
             h1 {
@@ -1265,6 +1333,154 @@
             
             h2 {
                 font-size: 1.75rem;
+            }
+            
+            h3 {
+                font-size: 1.25rem;
+            }
+            
+            p {
+                font-size: 1rem;
+                line-height: 1.7;
+            }
+            
+            .section-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .btn {
+                padding: 0.875rem 1.5rem;
+                font-size: 0.95rem;
+                width: 100%;
+            }
+            
+            .hero {
+                min-height: auto;
+                padding: 2rem 0;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-description {
+                font-size: 1.1rem;
+            }
+            
+            .hero-actions {
+                flex-direction: column;
+            }
+            
+            .hero-actions .btn {
+                width: 100%;
+            }
+            
+            .logo-acronym {
+                font-size: 1.5rem;
+            }
+            
+            .logo-full-name {
+                font-size: 0.65rem;
+            }
+            
+            .header-content {
+                padding: 0.75rem 1rem;
+            }
+            
+            .nav-links {
+                gap: 0;
+            }
+            
+            .nav-links a {
+                font-size: 0.85rem;
+                padding: 0.5rem 0.75rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .form-group {
+                margin-bottom: 1.25rem;
+            }
+            
+            .form-group input,
+            .form-group textarea,
+            .form-group select {
+                padding: 0.875rem;
+                font-size: 1rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .toast {
+                bottom: 1rem;
+                right: 1rem;
+                left: 1rem;
+                max-width: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container, .container-wide {
+                padding: 0 1rem;
+            }
+            
+            .section {
+                padding: 2rem 0;
+            }
+            
+            h1 {
+                font-size: 1.75rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .hero-title {
+                font-size: 1.75rem;
+            }
+            
+            .card {
+                padding: 1.25rem;
+            }
+            
+            .logo-acronym {
+                font-size: 1.25rem;
+            }
+            
+            .logo-full-name {
+                font-size: 0.6rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
             }
         }
         
@@ -2837,6 +3053,19 @@
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+            
+            .section-header {
+                margin-bottom: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.75rem;
+                margin-bottom: 0.75rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1rem;
+            }
         }
         
         /* Dark Mode Support (Optional) */
@@ -3120,7 +3349,7 @@
                     <li><a href="resources.html">Resources</a></li>
                     <li><a href="events.html">Events</a></li>
                     <li><a href="faq.html">FAQ</a></li>
-                    <li><a href="index.html#apply">Apply</a></li>
+                    <li><a href="apply.html">Apply</a></li>
                     <li><a href="index.html#contact">Contact</a></li>
                 </ul>
                 <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">☰</button>
@@ -3139,7 +3368,7 @@
                         Youth Publications & Socioeconomic Forum (YPSF) is a youth-driven organization dedicated to advancing inclusive education and decent work through advocacy, research, and action. We mobilize networks, publish evidence, and collaborate with institutions to turn policy into practice.
                     </p>
                     <div class="hero-actions">
-                        <a href="#apply" class="btn btn-primary">Apply to YPSF</a>
+                        <a href="apply.html" class="btn btn-primary">Apply to YPSF</a>
                         <a href="#programs" class="btn btn-secondary">Explore Programs</a>
         </div>
         </div>
@@ -3365,7 +3594,7 @@
                     </ul>
                     
                     <div style="margin-top: 2rem;">
-                        <a href="#apply" class="btn btn-primary">Apply Now</a>
+                        <a href="apply.html" class="btn btn-primary">Apply Now</a>
 </div>
     </div>
                 <div class="grid grid-2 fade-in-scroll">
@@ -3500,7 +3729,7 @@
     </div>
   </section>
 
-    <!-- Application Section -->
+    <!-- Application CTA Section -->
     <section id="apply" class="section">
     <div class="container">
             <div class="section-header">
@@ -3508,97 +3737,26 @@
                 <h2 class="section-title">Apply to YPSF</h2>
                 <p class="section-subtitle">Ready to make a difference? Apply to join our fellowship program or become a volunteer</p>
         </div>
-            <div class="application-form">
-                <form id="applicationForm" class="card">
-                    <div class="form-group">
-                        <label for="fullName">Full Name *</label>
-                        <input type="text" id="fullName" name="fullName" required>
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <div class="card card-accent" style="padding: 3rem 2rem;">
+                    <h3 style="margin-bottom: 1.5rem; font-size: 1.75rem;">Start Your Application</h3>
+                    <p style="margin-bottom: 2rem; font-size: 1.1rem; line-height: 1.8;">
+                        Whether you're interested in our Fellowship Programme, workshops, publications lab, or volunteering opportunities, we'd love to hear from you. Our application process is simple and straightforward.
+                    </p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <a href="apply.html" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2.5rem;">Apply Now</a>
+                        <a href="faq.html" class="btn btn-outline" style="font-size: 1.1rem; padding: 1rem 2.5rem;">Learn More</a>
         </div>
-                    
-        <div class="grid grid-2">
-                        <div class="form-group">
-                            <label for="email">Email Address *</label>
-                            <input type="email" id="email" name="email" required>
+                    <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--glass-border);">
+                        <p style="font-size: 0.95rem; color: var(--muted); margin-bottom: 1rem;"><strong>What to expect:</strong></p>
+                        <ul style="text-align: left; max-width: 500px; margin: 0 auto; color: var(--muted); line-height: 2;">
+                            <li>Quick and easy application process</li>
+                            <li>Response within 2-3 weeks</li>
+                            <li>Rolling admissions - apply anytime</li>
+                            <li>Support throughout the process</li>
+          </ul>
+                    </div>
         </div>
-                        
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone">
-        </div>
-    </div>
-                    
-                    <div class="grid grid-2">
-                        <div class="form-group">
-                            <label for="country">Country / Region *</label>
-                            <input type="text" id="country" name="country" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="city">City</label>
-                            <input type="text" id="city" name="city">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="program">Program Interest *</label>
-                        <select id="program" name="program" required>
-                            <option value="">Select a program</option>
-                            <option value="fellowship">YPSF Fellowship Programme</option>
-                            <option value="workshop">Workshops</option>
-                            <option value="publications">Publications Lab</option>
-                            <option value="partnership">Partnership Pilots</option>
-                            <option value="volunteer">Volunteer</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="interests">Areas of Interest</label>
-                        <input type="text" id="interests" name="interests" placeholder="e.g., SDG 4, SDG 8, research, advocacy, events">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="background">Background & Experience</label>
-                        <textarea id="background" name="background" placeholder="Tell us about your educational background, work experience, and relevant skills"></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="motivation">Why do you want to join YPSF? *</label>
-                        <textarea id="motivation" name="motivation" required placeholder="Share your motivation and what you hope to achieve"></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="goals">What are your goals and how do they align with YPSF's mission?</label>
-                        <textarea id="goals" name="goals" placeholder="Describe your goals and how they connect to our work"></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="availability">Availability & Commitment</label>
-                        <textarea id="availability" name="availability" placeholder="How many hours per week can you commit? What is your availability?"></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <div class="form-checkbox">
-                            <input type="checkbox" id="consent" name="consent" required>
-                            <label for="consent">I agree to be contacted by YPSF regarding my application and consent to the processing of my personal data *</label>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <div class="form-checkbox">
-                            <input type="checkbox" id="newsletter" name="newsletter">
-                            <label for="newsletter">I would like to receive updates and newsletters from YPSF</label>
-                        </div>
-                    </div>
-                    
-                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
-                        <button type="submit" class="btn btn-primary form-submit" style="flex: 1; min-width: 200px;">Submit Application</button>
-                        <button type="button" id="downloadApplicationBtn" class="btn btn-secondary" style="flex: 1; min-width: 200px;">Download as JSON</button>
-                        <button type="button" id="emailApplicationBtn" class="btn btn-outline" style="flex: 1; min-width: 200px;">Email Application</button>
-                    </div>
-                    
-                    <div id="formMessage" style="display: none; margin-top: 1rem; padding: 1rem; background: #ecfdf5; border: 1px solid #bbf7d0; border-radius: 8px; color: #166534;"></div>
-                </form>
       </div>
     </div>
   </section>
@@ -3914,7 +4072,7 @@
                     <p><a href="faq.html">FAQ</a></p>
                     <p><a href="partners.html">Partners</a></p>
                     <p><a href="news.html">News</a></p>
-                    <p><a href="index.html#apply">Apply</a></p>
+                    <p><a href="apply.html">Apply</a></p>
                     <p><a href="index.html#contact">Contact</a></p>
         </div>
                 <div class="footer-section">
@@ -3923,7 +4081,7 @@
                     <p><a href="#programs">Workshops</a></p>
                     <p><a href="#programs">Publications Lab</a></p>
                     <p><a href="#programs">Partnership Pilots</a></p>
-                    <p><a href="#apply">Volunteer Opportunities</a></p>
+                    <p><a href="apply.html">Volunteer Opportunities</a></p>
           </div>
                 <div class="footer-section">
                     <h3>Contact</h3>
