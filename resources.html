@@ -3259,7 +3259,7 @@
           </div>
                 <div class="footer-section">
                     <h3>Contact</h3>
-                    <p>Email: <a href="mailto:info@ypsf.org">info@ypsf.org</a></p>
+                    <p>Email: <a href="mailto:admin@ypsforum.org">admin@ypsforum.org</a></p>
                     <p>Global Network</p>
                     <p>Remote-First Organization</p>
         </div>
@@ -3525,7 +3525,7 @@
                     const applicantName = data.fullName || 'Applicant';
                     const subject = encodeURIComponent(`YPSF Application - ${applicantName}`);
                     const body = encodeURIComponent(`Dear YPSF Team,\n\nPlease find my application details below:\n\n${JSON.stringify(data, null, 2)}\n\nThank you for your consideration.\n\nBest regards,\n${applicantName}`);
-                    window.location.href = `mailto:info@ypsf.org?subject=${subject}&body=${body}`;
+                    window.location.href = `mailto:admin@ypsforum.org?subject=${subject}&body=${body}`;
                 });
             }
         }
